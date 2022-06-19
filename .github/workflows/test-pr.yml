@@ -9,7 +9,6 @@ on:
     - '**.csproj'
 
 env:
-  DOTNET_VERSION: '5.0.301' # The .NET SDK version to use
   DOTNET_NOLOGO: 1
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
   NUGET_PACKAGES: ${{ github.workspace }}/.github/nuget-packages
@@ -33,7 +32,10 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: ${{ env.DOTNET_VERSION }}
+        dotnet-version: |
+          '6.0.x'
+          '5.0.x'
+        include-prerelease: true
 
     - name: Install dependencies
       run: dotnet restore

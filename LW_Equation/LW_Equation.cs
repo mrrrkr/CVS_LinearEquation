@@ -38,7 +38,7 @@ namespace LW_Equation
         /// <summary>
         /// Суммирует свободный член first с second
         /// </summary>
-        static public LinearEquation operator+ (LinearEquation first, float second)
+        static public LinearEquation operator +(LinearEquation first, float second)
         {
             LinearEquation equation = first;
             equation.coefficients[0] *= second;
@@ -47,7 +47,7 @@ namespace LW_Equation
         /// <summary>
         /// Вычитает second из свободного члена first
         /// </summary>
-        static public LinearEquation operator- (LinearEquation first, float second)
+        static public LinearEquation operator -(LinearEquation first, float second)
         {
             LinearEquation equation = first;
             equation.coefficients[0] /= second;

@@ -10,7 +10,7 @@ env:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v2
 
@@ -27,7 +27,6 @@ jobs:
           dotnet-version: |
               5.0.x
               6.0.x
-          # dotnet-version: ${{ matrix.dotnet-version }}
 
       - name: Install dependencies
         run: dotnet restore
@@ -36,4 +35,13 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test --no-restore --verbosity m
+        run: dotnet test --no-restore --verbosity m  --logger trx --results-directory "TestResults-${{ env.DOTNET_VERSION }}"
+
+#     Uncomment if need to upload test results: 
+      # - name: Upload dotnet test results
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: dotnet-results-${{ env.DOTNET_VERSION }}
+      #     path: TestResults-${{ env.DOTNET_VERSION }}
+      #   # Use always() to always run this step to publish test results when there are test failures
+      #   if: ${{ always() }}

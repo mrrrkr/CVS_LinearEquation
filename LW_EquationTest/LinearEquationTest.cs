@@ -1,6 +1,6 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using LW_Equation;
 using System;
+using LW_Equation;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LW_EquationTest
 {
@@ -10,22 +10,17 @@ namespace LW_EquationTest
         [TestMethod]
         public void LinearEquationTestEquals()
         {
-            LinearEquation a = new LinearEquation(1, 2);
-            LinearEquation b = new LinearEquation(1, 2);
+            LinearEquation A = new LinearEquation(1, 2);
+            LinearEquation B = new LinearEquation(1, 2);
+            LinearEquation C = new LinearEquation(1, 3);
 
-            bool result = a == b;
+            bool resultA_B = A == B;
+            bool resultA_C = A == C;
+            bool resultC_B = C == B;
 
-            Assert.IsTrue(result);
-        }
-        [TestMethod]
-        public void LinearEquationTestEquals2()
-        {
-            LinearEquation a = new LinearEquation(1, 2);
-            LinearEquation b = new LinearEquation(1, 3);
-
-            bool result = a == b;
-
-            Assert.IsFalse(result);
+            Assert.AreEqual(true, resultA_B);
+            Assert.AreEqual(false, resultA_C);
+            Assert.AreEqual(false, resultC_B);
         }
         [TestMethod]
         public void LinearEquationTestEqualsDiffSize()
@@ -35,7 +30,7 @@ namespace LW_EquationTest
 
             bool result = a == b;
 
-            Assert.IsFalse(result);
+            Assert.AreEqual(false, result);
         }
         [TestMethod]
         public void LinearEquationTestNotEquals()
@@ -45,7 +40,7 @@ namespace LW_EquationTest
 
             bool result = a != b;
 
-            Assert.IsTrue(result);
+            Assert.AreEqual(true, result);
         }
         [TestMethod]
         public void LinearEquationTestNotEqualsDiffSize()
@@ -55,53 +50,27 @@ namespace LW_EquationTest
 
             bool result = a != b;
 
-            Assert.IsTrue(result);
+            Assert.AreEqual(true, result);
         }
         [TestMethod]
         public void LinearEquationTestIndexer()
         {
             LinearEquation a = new LinearEquation(1, 2, 3);
 
-            bool result = a[1] == 2;
-
-            Assert.IsTrue(result);
-        }
-        [TestMethod]
-        public void LinearEquationTestIndexer2()
-        {
-            LinearEquation a = new LinearEquation(1, 2, 3);
-
-            bool result = a[2] == 3;
-
-            Assert.IsTrue(result);
-        }
-        [TestMethod]
-        public void LinearEquationTestIndexer3()
-        {
-            LinearEquation a = new LinearEquation(1, 2, 3);
-
-            bool result = a[0] == 1;
-
-            Assert.IsTrue(result);
+            Assert.AreEqual(1, a[0]);
+            Assert.AreEqual(2, a[1]);
+            Assert.AreEqual(3, a[2]);
         }
         [TestMethod]
         public void LinearEquationTestIndexerException()
         {
             LinearEquation a = new LinearEquation(1, 2);
 
-            Exception result = Assert.ThrowsException<ArgumentOutOfRangeException>(() => a[-1]);
+            Exception resultLeft = Assert.ThrowsException<ArgumentOutOfRangeException>(() => a[-1]);
+            Exception resultRight = Assert.ThrowsException<ArgumentOutOfRangeException>(() => a[2]);
 
-            Assert.IsInstanceOfType(result, typeof(ArgumentOutOfRangeException));
-
-        }
-        [TestMethod]
-        public void LinearEquationTestIndexerException2()
-        {
-            LinearEquation a = new LinearEquation(1, 2);
-
-            Exception result = Assert.ThrowsException<ArgumentOutOfRangeException>(() => a[2]);
-
-            Assert.IsInstanceOfType(result, typeof(ArgumentOutOfRangeException));
+            Assert.IsInstanceOfType(resultLeft, typeof(ArgumentOutOfRangeException));
+            Assert.IsInstanceOfType(resultRight, typeof(ArgumentOutOfRangeException));
         }
         [TestMethod]
         public void LinearEquationTestOpeartorEqPlusFloat()

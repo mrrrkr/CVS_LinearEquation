@@ -12,17 +12,22 @@ namespace LW_Equation
         public int Size => coefficients.Count;
 
         /// <summary>
-        /// Конструирует уравнение вида coefficients[0]x + ... + coefficients[N-2]y + (aN)z + b = 0
+        /// Конструирует уравнение вида aN*x + coefficients[0]y + ... + coefficients[N-2]z + coefficients[N-1] = 0
         /// </summary>
-        /// <param name="b">Свободный член</param>
+        /// 
+        /// Примеры:
+        /// <example>
+        /// LinearEquation(1,2,3,4) => 1x + 2y + 3z + 4 = 0
+        /// LinearEquation(1,2) => 1x + 2 = 0
+        /// LinearEquation(1) => 1x = 0
+        /// </example>
+        /// 
         /// <param name="aN">Последний коэффициент</param>
         /// <param name="coefficients">Остальные коэффициенты</param>
-        public LinearEquation(float b, float aN, params float[] coefficients)
+        public LinearEquation(float aN, params float[] coefficients)
         {
-            this.coefficients = new List<float>();
-            this.coefficients.Add(aN);
-            this.coefficients.Add(b);
             this.coefficients.AddRange(coefficients);
+            this.coefficients.Add(aN);
         }
         public LinearEquation(List<float> coefficients)
         {

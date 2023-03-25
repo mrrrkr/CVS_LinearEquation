@@ -19,7 +19,7 @@ namespace LW_Equation
         /// <example>
         /// LinearEquation(1,2,3,4) => 1x + 2y + 3z + 4 = 0
         /// LinearEquation(1,2) => 1x + 2 = 0
-        /// LinearEquation(1) => 1x = 0
+        /// LinearEquation(1) => 1 = 0 (не имеет решений)
         /// </example>
         /// 
         /// <param name="aN">Последний коэффициент</param>
